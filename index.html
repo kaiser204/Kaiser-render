@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Kaiser Store</title>
+</head>
+
+<body style="font-family:Arial;background:#0f172a;color:white;text-align:center;padding:50px;">
+
+<h1>🔐 Login Admin</h1>
+
+<input id="user" placeholder="usuário"><br><br>
+<input id="pass" type="password" placeholder="senha"><br><br>
+
+<button onclick="login()">Entrar</button>
+
+<p id="msg"></p>
+
+<script>
+function login(){
+  fetch("/login",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      user:user.value,
+      pass:pass.value
+    })
+  })
+  .then(r=>r.json())
+  .then(d=>{
+    if(d.success){
+      window.location.href="/dashboard.html";
+    } else {
+      msg.innerText="Login errado!";
+    }
+  })
+}
+</script>
+
+</body>
+</html>
